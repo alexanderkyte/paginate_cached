@@ -13,25 +13,25 @@ module PaginateCached
     # next_page: will hold the new page number, and has_more_results will hold whether there are more results.
     #
     def paginate_cached args={}
-          page = args[:page] || 1
-          number_of_results = args[:number_of_results] || 25
-          search_id = args[:search_id]
-          offset = (page-1)*number_of_results
-
-          unless search_id and results = Rails.cache.read(search_id) then
-                results = yield
-                search_id = "#{results.hash}#{Time.now.to_i}"
-                Rails.cache.write search_id, results, expires_in: 15.minutes
-          end
-
-          return {
-                  results: results[offset, number_of_results],
-                  search_id: search_id, 
-                  next_page: page+1, 
-                  has_more_results: results[((page)*number_of_results)+1] != nil
-                 }
-
-     end
+            page = args[:page] || 1
+            number_of_results = args[:number_of_results] || 25
+            search_id = args[:search_id]
+            offset = (page-1)*number_of_results
+  
+            unless search_id and results = Rails.cache.read(search_id) then
+                  results = yield
+                  search_id = "#{results.hash}#{Time.now.to_i}"
+                  Rails.cache.write search_id, results, expires_in: 15.minutes
+            end 
+  
+            return {
+                    results: results[offset, number_of_results],
+                    search_id: search_id, 
+                    next_page: page+1, 
+                    has_more_results: results[((page)*number_of_results)+1] != nil 
+                   }   
+  
+     end 
 
   end
 end
