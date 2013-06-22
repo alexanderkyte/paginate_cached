@@ -1,0 +1,3 @@
+This gem allows for a more flexible solution to pagination than will_paginate. This gem provides a helper method for the controller called paginate_cached which uses memcached to memoize the operations required to perform the search. This is a truer pagination than the way that will_paginate usually uses, which re-executes the search. While only tested with Dali, it's fully possible to use this with any other caching method which uses the Rails.cache abstraction. 
+
+I suggest anyone interested in using this gem to read the soruce. Its short enough and simple enough that it's probably clearer documentation than english could provide.
