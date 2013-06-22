@@ -33,6 +33,6 @@ module PaginateCached
 
    end
 
-  ActionView::Base.send :include, PaginateCached
+  ActionController::Base.send :include, PaginateCached
 
 end
