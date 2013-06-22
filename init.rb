@@ -1,0 +1,1 @@
+require 'paginate_cached'
